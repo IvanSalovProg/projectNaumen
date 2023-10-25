@@ -1,4 +1,4 @@
-package com.example.ATM.model;
+package com.naumen.atm.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

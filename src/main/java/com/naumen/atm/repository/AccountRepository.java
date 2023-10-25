@@ -1,6 +1,6 @@
-package com.example.ATM.repository;
+package com.naumen.atm.repository;
 
-import com.example.ATM.model.Account;
+import com.naumen.atm.model.Account;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AccountRepository extends CrudRepository<Account,Long> {

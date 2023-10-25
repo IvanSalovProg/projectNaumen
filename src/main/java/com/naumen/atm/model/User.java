@@ -1,21 +1,16 @@
-package com.example.ATM.model;
+package com.naumen.atm.model;
 
 import jakarta.persistence.*;
 
 @Entity
-public class AccountHolder {
+@Table(name = "users")
+public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
-
-    public AccountHolder(Long id, String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
     public Long getId() {
         return id;

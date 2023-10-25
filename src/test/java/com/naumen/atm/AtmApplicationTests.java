@@ -1,4 +1,4 @@
-package com.example.ATM;
+package com.naumen.atm;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
