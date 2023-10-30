@@ -1,7 +1,7 @@
-package com.naumen.atm.services;
+package com.naumen.service;
 
-import com.naumen.atm.model.Account;
-import com.naumen.atm.repository.AccountRepository;
+import com.naumen.model.Account;
+import com.naumen.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

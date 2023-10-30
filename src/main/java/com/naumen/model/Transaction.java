@@ -1,11 +1,9 @@
-package com.naumen.atm.model;
+package com.naumen.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class Transactions {
+public class Transaction {
 
     @Id
     @GeneratedValue
@@ -17,12 +15,6 @@ public class Transactions {
 
     private String  nameTransaction;
 
-    public Transactions(Long id, int countNumber, int transactionSum, String nameTransaction) {
-        this.id = id;
-        this.countNumber = countNumber;
-        this.transactionSum = transactionSum;
-        this.nameTransaction = nameTransaction;
-    }
 
     public Long getId() {
         return id;
