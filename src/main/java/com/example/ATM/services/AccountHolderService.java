@@ -1,18 +1,31 @@
 package com.example.ATM.services;
 
+import com.example.ATM.dto.ProfileDto;
 import com.example.ATM.model.Account;
+import com.example.ATM.model.AccountHolder;
+import com.example.ATM.model.User;
 import com.example.ATM.repository.AccountHolderRepository;
+import com.example.ATM.repository.UserRepository;
+import org.springframework.data.util.Pair;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
+
+import static java.util.Objects.isNull;
 
 @Service
 public class AccountHolderService implements AccountService {
 
     protected final AccountHolderRepository repository;
+    protected final UserRepository userRepository;
 
-    public AccountHolderService(AccountHolderRepository repository) {
+    public AccountHolderService(AccountHolderRepository repository,
+                                UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -34,4 +47,28 @@ public class AccountHolderService implements AccountService {
     public void saveAccount(Account account) {
 
     }
+
+    public void createAccountHolder(ProfileDto profile) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByLogin(auth.getName());
+        user.getAccountHolder().setFirstName(profile.getFirstName());
+        user.getAccountHolder().setLastName(profile.getLastName());
+        userRepository.save(user);
+    }
+
+    public AccountHolder getAccountHolderByName() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByLogin(auth.getName());
+        return user.getAccountHolder();
+    }
+
+    public Pair<Boolean, Model> isFillDataForAccountHolder(Model model) {
+        AccountHolder accountHolder = getAccountHolderByName();
+        if (isNull(accountHolder.getFirstName()) || isNull(accountHolder.getLastName())) {
+            return Pair.of(false, model.addAttribute("message", "Не заполнены данные пользователя"));
+        }
+        return Pair.of(true, model.addAttribute("username", accountHolder.getFirstName() + " " + accountHolder.getLastName()));
+    }
+
+
 }

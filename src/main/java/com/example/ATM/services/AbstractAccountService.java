@@ -9,19 +9,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AbstractAccountService implements AccountService{
+public class AbstractAccountService implements AccountService {
 
     protected final AccountRepository repository;
 
 
-public AbstractAccountService(AccountRepository repository){
-    this.repository = repository;
-}
+    public AbstractAccountService(AccountRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Account> getAllAccount() {
-List<Account> result = new ArrayList<>();
-repository.findAll().forEach(result::add);
+        List<Account> result = new ArrayList<>();
+        repository.findAll().forEach(result::add);
         return result.stream().filter(account ->
                 account.getName().equals(getName())).collect(Collectors.toList());
     }
@@ -30,9 +30,9 @@ repository.findAll().forEach(result::add);
     @Override
     public void saveAccount(int countNumber, int countSum, String countName) {
 
-Account newAccount = new Account(countNumber, countSum, countName);
+        Account newAccount = new Account(countNumber, countSum, countName);
 
-repository.save(newAccount);
+        repository.save(newAccount);
     }
 
     @Override
@@ -42,7 +42,7 @@ repository.save(newAccount);
 
     @Override
     public void saveAccount(Account account) {
-repository.save(account);
+        repository.save(account);
     }
 
 

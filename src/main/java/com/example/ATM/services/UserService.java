@@ -1,6 +1,6 @@
 package com.example.ATM.services;
 
-import com.example.ATM.dto.UserDto;
+import com.example.ATM.dto.RegisterDto;
 import com.example.ATM.model.AccountHolder;
 import com.example.ATM.model.Role;
 import com.example.ATM.model.User;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,7 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public void addUser(UserDto user) throws Exception {
+    public void addUser(RegisterDto user) throws Exception {
         User userFromDb = userRepository.findByLogin(user.getLogin());
         if (userFromDb != null) {
             throw new Exception("user exist");
@@ -36,7 +37,7 @@ public class UserService implements UserDetailsService {
         newUser.setRoles(Collections.singleton(Role.USER));
         newUser.setLogin(user.getLogin());
         newUser.setPassword(user.getPassword());
-        AccountHolder accountHolder = new AccountHolder(user.getUserName(), null);
+        AccountHolder accountHolder = new AccountHolder();
         newUser.setAccountHolder(accountHolder);
         userRepository.save(newUser);
     }

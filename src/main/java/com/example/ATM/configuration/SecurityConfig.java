@@ -25,7 +25,8 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true)
                         .permitAll()
-                );
+                )
+                .csrf().disable();
         return http.build();
     }
 
