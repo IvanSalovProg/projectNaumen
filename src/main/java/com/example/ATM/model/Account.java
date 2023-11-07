@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Account {
 
-    public Account( int countNumber, int countSum, String countName) {
+    public Account(int countNumber, int countSum, String countName) {
 
         this.countNumber = countNumber;
         this.countSum = countSum;
@@ -56,9 +56,9 @@ public class Account {
 
     private String countName;
 
-public Account(){
+    public Account() {
+    }
 
-}
     public String getName() {
         return "HistoryData";
     }
