@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -46,6 +47,20 @@ public class AccountHolderService implements AccountService {
     @Override
     public void saveAccount(Account account) {
 
+    }
+
+    public List<AccountHolder> getAllAccountHolder() {
+        List<AccountHolder> result = new ArrayList<>();
+        repository.findAll().forEach(result::add);
+        return result;
+    }
+
+    public List<AccountHolder> getAccountHolderByFirstName(String firstName) {
+        return new ArrayList<>(repository.findByFirstName(firstName));
+    }
+
+    public List<AccountHolder> getAccountHolderByLastName(String lastName) {
+        return new ArrayList<>(repository.findByLastName(lastName));
     }
 
     public void createAccountHolder(ProfileDto profile) {

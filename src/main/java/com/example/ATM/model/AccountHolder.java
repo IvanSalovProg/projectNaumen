@@ -12,14 +12,18 @@ public class AccountHolder {
     private Long id;
     private String firstName;
     private String lastName;
+    private String countName;
+    private int countNumber;
 
 
     @OneToOne(mappedBy = "accountHolder", cascade = CascadeType.ALL)
     private User user;
 
-    public AccountHolder(String firstName, String lastName) {
+    public AccountHolder(String firstName, String lastName, String countName, int countNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.countName = countName;
+        this.countNumber = countNumber;
     }
 
     public AccountHolder() {
@@ -55,5 +59,20 @@ public class AccountHolder {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getCountName() {
+        return countName;
+    }
+
+    public void setCountName(String countName) {
+        this.countName = countName;
+    }
+    public int getCountNumber() {
+        return countNumber;
+    }
+
+    public void setCountNumber(int countNumber) {
+        this.countNumber = countNumber;
     }
 }
