@@ -75,4 +75,8 @@ public class AccountHolder {
     public void setCountNumber(int countNumber) {
         this.countNumber = countNumber;
     }
+
+    public Object getName() {
+        return "HistoryData";
+    }
 }

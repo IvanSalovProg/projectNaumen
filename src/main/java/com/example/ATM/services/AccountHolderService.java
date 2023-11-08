@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 
@@ -40,11 +41,6 @@ public class AccountHolderService implements AccountService {
     }
 
     @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
     public void saveAccount(Account account) {
 
     }
@@ -52,7 +48,13 @@ public class AccountHolderService implements AccountService {
     public List<AccountHolder> getAllAccountHolder() {
         List<AccountHolder> result = new ArrayList<>();
         repository.findAll().forEach(result::add);
-        return result;
+        return result.stream().filter(account ->
+                account.getName().equals(getName())).collect(Collectors.toList());
+    }
+
+    @Override
+    public String getName() {
+        return "HistoryData";
     }
 
     public List<AccountHolder> getAccountHolderByFirstName(String firstName) {
