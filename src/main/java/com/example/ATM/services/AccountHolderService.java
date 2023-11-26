@@ -12,7 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 
@@ -39,13 +41,28 @@ public class AccountHolderService implements AccountService {
     }
 
     @Override
-    public String getName() {
-        return null;
+    public void saveAccount(Account account) {
+
+    }
+
+    public List<AccountHolder> getAllAccountHolder() {
+        List<AccountHolder> result = new ArrayList<>();
+        repository.findAll().forEach(result::add);
+        return result.stream().filter(account ->
+                account.getName().equals(getName())).collect(Collectors.toList());
     }
 
     @Override
-    public void saveAccount(Account account) {
+    public String getName() {
+        return "HistoryData";
+    }
 
+    public List<AccountHolder> getAccountHolderByFirstName(String firstName) {
+        return new ArrayList<>(repository.findByFirstName(firstName));
+    }
+
+    public List<AccountHolder> getAccountHolderByLastName(String lastName) {
+        return new ArrayList<>(repository.findByLastName(lastName));
     }
 
     public void createAccountHolder(ProfileDto profile) {
